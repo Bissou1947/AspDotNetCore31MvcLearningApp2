@@ -1,3 +1,5 @@
+using EmployeeManagement.Models;
+using EmployeeManagement.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -18,10 +20,17 @@ namespace EmployeeManagement
         {
             _iConfig = iConfig;
         }
+
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            //...we enable xml format for api
+            services.AddMvc(MvcOptions => MvcOptions.EnableEndpointRouting = false).
+                AddXmlSerializerFormatters();
+
+            //....depandancy injection (container)
+            services.AddSingleton<ICompanyRepository<Employee>, EmployeeRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -36,18 +45,9 @@ namespace EmployeeManagement
                 app.UseDeveloperExceptionPage(option);
             }
 
-            app.UseRouting();
-
             app.UseStaticFiles();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapGet("/", async context =>
-                {
-                    var processName = System.Diagnostics.Process.GetCurrentProcess().ProcessName;
-                    await context.Response.WriteAsync(processName);
-                });
-            });
+            app.UseMvcWithDefaultRoute();
         }
     }
 }
