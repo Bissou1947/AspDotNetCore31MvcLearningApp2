@@ -14,25 +14,33 @@ namespace EmployeeManagement.Controllers
             _companyRepositoryEmployee = companyRepository;
         }
 
+        //[Route("")]
         public ViewResult Index()
         {
             return View(_companyRepositoryEmployee.GetAll());
         }
+        //[HttpGet("Modify/{id:int:min(1)}")]
+        public string Edit(int id)
+        {
+            return "Edit: " + id.ToString();
+        }
+        //[HttpGet("Remove/{id:int:min(1)}")]
+        public string Delete(int id)
+        {
+            return "deleted: " + id.ToString();
+        }
 
+        //[Route("Informations")]
         public ViewResult Details(int id)
         {
-            EmploeeDetailsVM details = new EmploeeDetailsVM
-            {
-                employee = _companyRepositoryEmployee.GetById(id)
-            };
-            details.title = details.employee.name + " - Details";
-            return View(details);
+            return View(_companyRepositoryEmployee.GetById(id));
         }
 
 
 
         //....api
         //...ObjectResult for the user to take even json or even xml format
+        //[Route("Informations-Web/{id:int:min(1)}")]
         public ObjectResult ApiGetById(int id)
         {
             return new ObjectResult(_companyRepositoryEmployee.GetById(id));

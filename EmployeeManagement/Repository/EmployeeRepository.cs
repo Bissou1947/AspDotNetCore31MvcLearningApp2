@@ -12,9 +12,10 @@ namespace EmployeeManagement.Repository
         {
             employees = new List<Employee>
             {
-                new Employee{id=1,name="a",departement="aa",email="aaa"},
-                new Employee{id=2,name="b",departement="bb",email="bbb"},
-                new Employee{id=3,name="c",departement="cc",email="ccc"},
+                new Employee{id=0,name="nan",departement="nan",email="nan",photoPath="/images/employees/avatar/no-avatar.jpg"},
+                new Employee{id=1,name="a",departement="aa",email="aaa" ,photoPath="/images/employees/avatar/employee-avatar.jpeg"},
+                new Employee{id=2,name="b",departement="bb",email="bbb" ,photoPath="/images/employees/avatar/employee-avatar.jpeg"},
+                new Employee{id=3,name="c",departement="cc",email="ccc" ,photoPath="/images/employees/avatar/employee-avatar.jpeg"},
             };
         }
 

@@ -45,9 +45,17 @@ namespace EmployeeManagement
                 app.UseDeveloperExceptionPage(option);
             }
 
-            app.UseStaticFiles();
+            app.UseFileServer();
 
-            app.UseMvcWithDefaultRoute();
+            //app.UseMvc();
+
+            //app.UseMvcWithDefaultRoute();
+
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(name: "default",
+                    template: "{controller=Employee}/{action=Index}/{id?}");
+            });
         }
     }
 }

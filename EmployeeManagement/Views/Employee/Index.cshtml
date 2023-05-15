@@ -1,61 +1,30 @@
-﻿@model IEnumerable<EmployeeManagement.Models.Employee>
-
+﻿@model IEnumerable<Employee>
 @{
-    Layout = null;
+    ViewBag.Title = "Employees";
 }
 
-<!DOCTYPE html>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.departement)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.departement)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
-</body>
-</html>
+<h1 class="text-center m-5">@ViewBag.Title</h1>
+
+
+<div class="row">
+
+    @foreach (var item in Model)
+    {
+       <div class="col-sm-4">
+            <div class="card" style="width: 18rem;">
+            <img asp-append-version="true"  src="@item.photoPath" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">@item.name</h5>
+                <p class="card-text">@item.email<br />
+                @item.departement    
+                </p>
+                <a asp-action="Details" asp-route-id="@item.id" class="btn btn-primary">Details</a>
+                <a asp-action="Edit" asp-route-id="@item.id" class="btn btn-success">Edit</a>
+                <a asp-action="Delete" asp-route-id="@item.id" class="btn btn-danger">Delete</a>
+            </div>
+        </div>
+       </div>
+
+    }
+</div>

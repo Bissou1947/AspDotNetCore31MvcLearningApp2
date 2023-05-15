@@ -1,13 +1,25 @@
-﻿@model EmployeeManagement.ViewModels.EmploeeDetailsVM
-<!DOCTYPE html>
+﻿@model Employee
+@{
+    ViewBag.Title = "Employee.Details";
+}
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>@Model.title</title>
-</head>
-<body>
-    <h1 style="text-align:center;">@Model.title</h1>
-    <p>id: @Model.employee.id<br />name: @Model.employee.name<br />departement: @Model.employee.departement<br />email: @Model.employee.email</p>
-</body>
-</html>
+
+<h1 class="text-center">@ViewBag.Title</h1>
+
+
+<div class="row my-5">
+    <div class="col-12 mx-auto">
+        <h5 class="card-header text-danger display-3 text-center">@Model.name</h5>
+        <div class="text-center">
+            <img asp-append-version="true" src="@Model.photoPath" class="card-img-top" style="width:30%;height:30%" alt="@Model.name" />
+        </div>
+        <div class="card-body text-center">
+            <p class="card-text display-4">
+                <span class="text text-info">@Model.departement</span><br />
+                @Model.email
+            </p>
+            <a asp-action="Index" class="btn btn-primary">Back To Home Page</a>
+        </div>
+    </div>
+</div>
+
