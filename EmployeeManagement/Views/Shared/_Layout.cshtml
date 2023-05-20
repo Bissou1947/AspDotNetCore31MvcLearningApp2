@@ -4,18 +4,54 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>EMapp | @ViewBag.Title</title>
-    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link rel="icon" type="image/x-icon" href="~/images/employees/avatar/employee-avatar.jpeg" asp-append-version="true" />
+    <environment include="Development">
+        <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" asp-append-version="true" />
+
+        <script src="~/lib/jquery/dist/jquery.js" asp-append-version="true"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js" asp-append-version="true"></script>
+    </environment>
+
+    <environment exclude="Development">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+              integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
+              crossorigin="anonymous"
+              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-append-version="true"
+              asp-fallback-test-class="sr-only"
+              asp-fallback-test-property="position"
+              asp-fallback-test-value="absolute"
+              asp-suppress-fallback-integrity="true" />
+
+        <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js" asp-append-version="true"></script>
+    </environment>
+
 </head>
 <body>
+    <div class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <a class="navbar-brand" asp-controller="Employee" asp-action="Index">
+            <img src="~/images/employees/avatar/employee-avatar.jpeg" class="rounded-circle" width="40" height="40">
+        </a>
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#menu1">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="menu1">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a asp-controller="Employee" asp-action="Index" class="nav-link">Employees</a>
+                </li>
+                <li class="nav-item">
+                    <a asp-controller="Employee" asp-action="Create" class="nav-link">Create Employee</a>
+                </li>
+            </ul>
+        </div>
+    </div>
     <div class="container">
         @RenderBody()
     </div>
     <footer>
         &copy; Emapp-team
     </footer>
-
-    <script src="~/lib/jquery/dist/jquery.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
-
 </body>
 </html>

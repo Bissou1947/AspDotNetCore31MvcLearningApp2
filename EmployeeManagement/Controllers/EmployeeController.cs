@@ -14,28 +14,32 @@ namespace EmployeeManagement.Controllers
             _companyRepositoryEmployee = companyRepository;
         }
 
-        //[Route("")]
         public ViewResult Index()
         {
             return View(_companyRepositoryEmployee.GetAll());
         }
-        //[HttpGet("Modify/{id:int:min(1)}")]
-        public string Edit(int id)
-        {
-            return "Edit: " + id.ToString();
-        }
-        //[HttpGet("Remove/{id:int:min(1)}")]
-        public string Delete(int id)
-        {
-            return "deleted: " + id.ToString();
-        }
 
-        //[Route("Informations")]
         public ViewResult Details(int id)
         {
             return View(_companyRepositoryEmployee.GetById(id));
         }
 
+        public ViewResult Create()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(Employee data)
+        {
+            if (ModelState.IsValid)
+            {
+                _companyRepositoryEmployee.Add(data);
+                return RedirectToAction("Details", new { id = data.id });
+            }
+            ModelState.AddModelError("","Faild: check the errors.");
+            return View(data);
+        }
 
 
         //....api

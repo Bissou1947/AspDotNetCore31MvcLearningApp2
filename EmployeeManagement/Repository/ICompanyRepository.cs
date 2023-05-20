@@ -6,5 +6,6 @@ namespace EmployeeManagement.Repository
     {
         T GetById(int id);
         IEnumerable<T> GetAll();
+        void Add(T entity);
     }
 }

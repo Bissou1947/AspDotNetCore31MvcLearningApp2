@@ -3,6 +3,7 @@ using EmployeeManagement.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -28,6 +29,10 @@ namespace EmployeeManagement
             //...we enable xml format for api
             services.AddMvc(MvcOptions => MvcOptions.EnableEndpointRouting = false).
                 AddXmlSerializerFormatters();
+
+            services.AddDbContext<AppDbContext>(option => 
+            option.UseSqlServer(_iConfig.GetConnectionString("Con1"))
+            );
 
             //....depandancy injection (container)
             services.AddSingleton<ICompanyRepository<Employee>, EmployeeRepository>();

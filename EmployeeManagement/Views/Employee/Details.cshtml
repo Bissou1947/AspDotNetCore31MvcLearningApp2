@@ -4,12 +4,13 @@
 }
 
 
-<h1 class="text-center">@ViewBag.Title</h1>
+<h1 class="text-center m-5">@ViewBag.Title</h1>
 
 
 <div class="row my-5">
     <div class="col-12 mx-auto">
-        <h5 class="card-header text-danger display-3 text-center">@Model.name</h5>
+        <div class="card">
+            <h5 class="card-header text-danger display-3 text-center">@Model.name</h5>
         <div class="text-center">
             <img asp-append-version="true" src="@Model.photoPath" class="card-img-top" style="width:30%;height:30%" alt="@Model.name" />
         </div>
@@ -19,6 +20,7 @@
                 @Model.email
             </p>
             <a asp-action="Index" class="btn btn-primary">Back To Home Page</a>
+        </div>
         </div>
     </div>
 </div>

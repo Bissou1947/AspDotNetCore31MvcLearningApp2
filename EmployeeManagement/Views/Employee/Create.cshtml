@@ -1,0 +1,39 @@
+﻿@model Employee
+@inject ICompanyRepository<Employee> _companyRepositoryEmployee;
+@{
+    ViewData["Title"] = "Employee.Create";
+}
+
+<h1 class="text-center m-5">@ViewBag.Title</h1>
+
+
+<div class="my-5">
+    <form method="post" novalidate>
+        <div asp-validation-summary="ModelOnly" class="text-white font-weight-bolder bg-danger"></div>
+        <div class="form-row">
+            <div class="form-group col-12">
+                <label asp-for="name"></label>
+                <input asp-for="name" class="form-control" />
+                <span asp-validation-for="name" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-12">
+                <label asp-for="email"></label>
+                <input asp-for="email" class="form-control" />
+                <span asp-validation-for="email" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-12">
+                <label asp-for="departement"></label>
+                <select asp-for="departement" class="form-control" asp-items="Html.GetEnumSelectList<Department>()">
+                    <option value="">-- Select --</option>
+                </select>
+                <span asp-validation-for="departement" class="text-danger"></span>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-success btn-lg">Create Employee</button>
+    </form>
+    <h3 class="m-3 p-3 text-center rounded-circle bg-primary text-white">Total Employees: @(_companyRepositoryEmployee.GetAll().Count() - 1)</h3>
+</div>
