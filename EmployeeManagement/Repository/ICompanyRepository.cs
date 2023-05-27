@@ -5,7 +5,9 @@ namespace EmployeeManagement.Repository
     public interface ICompanyRepository<T>
     {
         T GetById(int id);
+        T Add(T entity);
         IEnumerable<T> GetAll();
-        void Add(T entity);
+        T Delete(int id);
+        T Update(T entity);
     }
 }

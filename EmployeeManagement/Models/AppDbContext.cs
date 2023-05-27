@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using EmployeeManagement.Extensions;
+using Microsoft.EntityFrameworkCore;
 
 namespace EmployeeManagement.Models
 {
@@ -10,5 +11,12 @@ namespace EmployeeManagement.Models
 
         }
         public DbSet<Employee> Employees { get; set; }
+
+        //...seed data
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            //...create extension methode seed, to make this class not to long
+            modelBuilder.Seed();
+        }
     }
 }

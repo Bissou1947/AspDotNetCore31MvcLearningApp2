@@ -20,11 +20,19 @@ namespace EmployeeManagement.Repository
             };
         }
 
-        public void Add(Employee entity)
+        public Employee Add(Employee entity)
         {
             entity.id = employees.Max(e => e.id) + 1;
             entity.photoPath = "/images/employees/avatar/employee-avatar.jpeg";
             employees.Add(entity);
+            return entity;
+        }
+
+        public Employee Delete(int id)
+        {
+            var emp = employees.Find(a=> a.id == id);
+            if(emp != null) employees.Remove(emp);
+            return emp;
         }
 
         public IEnumerable<Employee> GetAll()
@@ -35,6 +43,19 @@ namespace EmployeeManagement.Repository
         public Employee GetById(int id)
         {
             return employees.SingleOrDefault(a=>a.id.Equals(id));
+        }
+
+        public Employee Update(Employee entity)
+        {
+            var emp = employees.Find(a => a.id == entity.id);
+            if (emp != null)
+            {
+                emp.photoPath = entity.photoPath;
+                emp.email = entity.email;
+                emp.departement = entity.departement;
+                emp.name = entity.name;
+            }
+            return emp;
         }
     }
 }
